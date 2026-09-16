@@ -49,6 +49,37 @@ def _():
     return (mo,)
 
 
+@app.cell
+def _():
+    print("Welcome to my marimo notebook! 🚀")
+    return
+
+
+@app.cell
+def _():
+    print("Let's get started with some Python basics! 🐍")
+    return
+
+
+@app.cell
+def _():
+    1 + 3
+    return
+
+
+@app.cell
+def _():
+    print('hello world!')
+    return
+
+
+@app.cell
+def _():
+    for i in range(5):
+        print(i)
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
@@ -96,8 +127,20 @@ def _(mo):
 @app.cell
 def _():
     freight_charges = [16.75, 22.25, 25.00, 20.25, 36.25]
-    freight_charges
+
     return (freight_charges,)
+
+
+@app.cell
+def _(freight_charges):
+    print(freight_charges)
+    return
+
+
+@app.cell
+def _(freight_charges):
+    freight_charges
+    return
 
 
 @app.cell(hide_code=True)
@@ -118,6 +161,24 @@ def _(mo):
     *The number in brackets is an **index**, and Python counts from zero, so
     `freight_charges[0]` is the first one.*
     """)
+    return
+
+
+@app.cell
+def _(freight_charges):
+    print(freight_charges)
+    return
+
+
+@app.cell
+def _(freight_charges):
+    freight_charges[0]
+    return
+
+
+@app.cell
+def _(freight_charges):
+    len(freight_charges)
     return
 
 
@@ -145,6 +206,11 @@ def _(mo):
     typing inside one cell. Use the **undo** button at the bottom right, which stays
     there until you close the notebook, or `Ctrl+K` and search for undo.*
     """)
+    return
+
+
+@app.cell
+def _():
     return
 
 
