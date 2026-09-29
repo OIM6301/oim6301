@@ -134,6 +134,13 @@
         "showCode": true
       },
       {
+        "type": "sub-slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
         "type": "slide"
       },
       {

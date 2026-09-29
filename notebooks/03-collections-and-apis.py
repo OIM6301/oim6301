@@ -449,6 +449,38 @@ def _():
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
+    > **Advanced · A year of trades.** A client made the trades below this year, one tuple per trade: date, ticker, `"buy"` or `"sell"`, shares, price. When the client sells, which of the shares bought earlier were the ones sold? The usual rule is **first in, first out**: a sale uses up the oldest shares first. Selling 120 AAPL on April 15 uses the 100 bought in January, then 20 of the 50 bought in March.
+    >
+    > 1. **By hand, no agent.** In the written answers cell, write the algorithm in words: what you keep for each ticker, and what happens to it on a sale.
+    > 2. **Then work it out with your agent**, and keep going until you can explain every line.
+    > 3. Find the gain on each sale, the total, and the shares left.
+    >
+    > *Check yourself: gains of $7,900.00 in all, $6,700.00 on AAPL and $1,200.00 on MSFT. Left: 20 AAPL bought at $240.00, and 10 MSFT at $380.00.*
+    >
+    > **Going further.** Work it out again with **average cost**, where a sale uses the average price of every share held. The total changes. Which rule would the client rather report this year, and why?
+    """)
+    return
+
+
+@app.cell
+def _():
+    year_trades = [
+        ("2026-01-05", "AAPL", "buy", 100, 180.00),
+        ("2026-02-10", "MSFT", "buy", 40, 400.00),
+        ("2026-03-02", "AAPL", "buy", 50, 210.00),
+        ("2026-04-15", "AAPL", "sell", 120, 230.00),
+        ("2026-05-20", "MSFT", "buy", 20, 380.00),
+        ("2026-06-08", "MSFT", "sell", 50, 420.00),
+        ("2026-07-01", "AAPL", "buy", 30, 240.00),
+        ("2026-08-12", "AAPL", "sell", 40, 250.00),
+    ]
+    year_trades
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
     # 5. Asking a Server
 
     An **API** is a web address that answers with data. Open-Meteo is a free weather service that needs no key and no sign-up.
