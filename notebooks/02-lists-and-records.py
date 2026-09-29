@@ -10,7 +10,7 @@
 import marimo
 
 __generated_with = "0.24.2"
-app = marimo.App(width="medium", sql_output="pandas")
+app = marimo.App(layout_file="layouts/02-lists-and-records.slides.json", width="medium", sql_output="pandas")
 
 
 @app.cell

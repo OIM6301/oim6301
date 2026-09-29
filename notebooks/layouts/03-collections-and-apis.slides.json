@@ -1,0 +1,214 @@
+{
+  "type": "slides",
+  "data": {
+    "cells": [
+      {
+        "type": "skip"
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "skip"
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "sub-slide"
+      },
+      {
+        "type": "sub-slide"
+      },
+      {
+        "type": "slide"
+      },
+      {
+        "type": "slide"
+      }
+    ],
+    "deck": {}
+  }
+}
