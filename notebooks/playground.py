@@ -6,8 +6,66 @@ app = marimo.App(width="medium")
 
 @app.cell
 def _():
+    total = 0
+    for charge in [10, 20, 30]:    
+        total = total + charge
+    print(total)
+    return (charge,)
+
+
+@app.cell
+def _():
+    max(["16.75", "9.50", "22.25"])
+    return
+
+
+@app.cell
+def _():
+    order_lines = ["notebook", "pen"]
+    order_lines.extend(["stapler", "tape"])
+    order_lines
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
     charge = 10
     return (charge,)
+
+
+@app.cell
+def _():
+    return
 
 
 @app.cell

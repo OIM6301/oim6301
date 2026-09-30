@@ -10,7 +10,11 @@
 import marimo
 
 __generated_with = "0.24.2"
-app = marimo.App(layout_file="layouts/02-lists-and-records.slides.json", width="medium", sql_output="pandas")
+app = marimo.App(
+    width="medium",
+    layout_file="layouts/02-lists-and-records.slides.json",
+    sql_output="pandas",
+)
 
 
 @app.cell
@@ -617,8 +621,14 @@ def _():
     {"OrderID": 11019, "CustomerID": "RANCH", "ShipCountry": "Argentina", "ShipCity": "Buenos Aires", "OrderDate": "2018-04-13", "ShippedDate": None, "Freight": 11.25},
     {"OrderID": 11039, "CustomerID": "LINOD", "ShipCountry": "Venezuela", "ShipCity": "I. de Margarita", "OrderDate": "2018-04-21", "ShippedDate": None, "Freight": 43.00},
     ]
-    len(orders)
+    len(orders), type(orders)
     return (orders,)
+
+
+@app.cell
+def _(orders):
+    type(orders[0]) 
+    return
 
 
 @app.cell(hide_code=True)
