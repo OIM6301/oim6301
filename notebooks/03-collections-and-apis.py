@@ -32,6 +32,8 @@ def _(mo):
     |---|---|
     | ✏️ | Your turn. Add cells with the **+** button |
     | 🚀 | This week's work |
+
+    Every ✏️ is part of this week's work. Those marked **Advanced** are optional; try them once the rest is done.
     """)
     return
 
@@ -678,7 +680,7 @@ def _(mo):
 
     1. **Notebook 2, sections 4 to 6**, including your *One row is...* sentence
     2. **Everything above in this notebook** that is not marked **Advanced**, in your repository under `notebooks/`
-    3. **`AGENTS.md`** in the top folder of your repository, committed
+    3. **`AGENTS.md`** in the root folder of your repository, committed
     4. **Commit as you go**, with messages that state what changed, and push before you stop
     """)
     return
