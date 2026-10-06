@@ -15,6 +15,20 @@
         "type": "slide"
       },
       {
+        "type": "slide"
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "slide"
+      },
+      {
         "type": "fragment",
         "showCode": true
       },

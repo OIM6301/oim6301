@@ -56,6 +56,36 @@ def _(mo):
     return
 
 
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Start with the smallest one. `def` starts a function, and `add_tax` is its name, a verb and a noun for what it does. `amount` in brackets is its **parameter**, what it takes in, and `return` is what it gives back. Defining it runs nothing; it runs each time it is called. Massachusetts sales tax is 6.25%.
+    """)
+    return
+
+
+@app.cell
+def _():
+    def add_tax(amount):
+        return round(amount * 1.0625, 2)
+
+    return (add_tax,)
+
+
+@app.cell
+def _(add_tax):
+    add_tax(100)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    If the tax rate changes, you edit the one line inside `add_tax`, and every call uses the new rate. A function can also hold a loop. The next one computes what a whole portfolio costs.
+    """)
+    return
+
+
 @app.cell
 def _():
     holdings = [
@@ -73,8 +103,6 @@ def _():
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    `def` starts a function. The name in brackets is its **parameter**, what it takes in, and `return` is what it gives back. Defining it runs nothing; the loop runs each time the function is called.
-
     **Names inside a function belong to that function.** `symbol`, `shares` and `cost_so_far` exist only while it runs, so they need no underscore, and two functions can each use `price` without colliding.
     """)
     return
@@ -82,18 +110,18 @@ def _(mo):
 
 @app.cell
 def _():
-    def portfolio_cost(portfolio):
+    def compute_cost(portfolio):
         cost_so_far = 0
         for symbol, shares, price in portfolio:
             cost_so_far = cost_so_far + shares * price
         return round(cost_so_far, 2)
 
-    return (portfolio_cost,)
+    return (compute_cost,)
 
 
 @app.cell
-def _(holdings, portfolio_cost):
-    portfolio_cost(holdings)
+def _(holdings, compute_cost):
+    compute_cost(holdings)
     return
 
 
@@ -117,8 +145,8 @@ def _():
 
 
 @app.cell
-def _(portfolio_cost, retirement_holdings):
-    portfolio_cost(retirement_holdings)
+def _(compute_cost, retirement_holdings):
+    compute_cost(retirement_holdings)
     return
 
 
@@ -127,8 +155,8 @@ def _(mo):
     mo.md(r"""
     **Why programs are built from functions:**
 
-    - **A change happens in one place.** Add a trading fee inside `portfolio_cost` and every portfolio's cost follows.
-    - **The name says what the work is for.** `portfolio_cost(retirement_holdings)` reads as a sentence; a loop has to be read line by line.
+    - **A change happens in one place.** Add a trading fee inside `compute_cost` and every portfolio's cost follows.
+    - **The name says what the work is for.** `compute_cost(retirement_holdings)` reads as a sentence; a loop has to be read line by line.
     - **Everything it needs comes in through the brackets.** So you can test it on a portfolio whose answer you already know, such as notebook 3's $116,302.70.
     """)
     return
@@ -153,7 +181,7 @@ def _(mo):
     mo.md(r"""
     ## ✏️ A · The largest holding
 
-    Add a cell that defines `largest_holding(portfolio)`. It returns the ticker and the cost of the holding that cost the most, as a tuple. Call it on both portfolios.
+    Add a cell that defines `find_largest(portfolio)`. It returns the ticker and the cost of the holding that cost the most, as a tuple. Call it on both portfolios.
 
     *Check yourself: `('TSLA', 38355.0)` and `('VTI', 27408.0)`.*
 
