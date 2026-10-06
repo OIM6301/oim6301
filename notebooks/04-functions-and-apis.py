@@ -59,7 +59,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    Start with the smallest one. `def` starts a function, and `add_tax` is its name, a verb and a noun for what it does. `amount` in brackets is its **parameter**, what it takes in, and `return` is what it gives back. Defining it runs nothing; it runs each time it is called. Massachusetts sales tax is 6.25%.
+    Start with the smallest one. `def` starts a function, and `add_tax` is its name, a verb and a noun for what it does. `amount` in brackets is its **parameter**, what it takes in, and `return` is what it gives back. Defining it runs nothing; it runs each time it is called. Massachusetts sales tax is 6.25%, so the function multiplies by 1.0625.
     """)
     return
 
