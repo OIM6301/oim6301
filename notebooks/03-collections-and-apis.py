@@ -393,7 +393,7 @@ def _(mo):
     mo.md(r"""
     Four questions, asked in order, from [Python §19](/handbooks/python/02-collections/#19-choosing-a-data-structure):
 
-    1. **Are you only asking whether you have seen a value before?** A set. Stop here.
+    1. **Are you only asking whether you have seen a value before?** A set.
     2. **Is it one thing with named parts?** A dictionary. If the parts must never change, a tuple.
     3. **Is it many of the same thing?** A list.
     4. **Does each of those things have named parts?** Then a list of dictionaries, which is a table.

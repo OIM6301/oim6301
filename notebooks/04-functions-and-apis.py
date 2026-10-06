@@ -175,11 +175,11 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    # 2. A Function on Another Computer
+    # 2. Calling an API
 
-    An **API endpoint** is a function someone else wrote, running on their computer. You call it with a web address; their server runs the code and sends back the result.
+    Calling an **API** is like calling a function someone else wrote, running on their computer. You call it with a web address, their server runs its code, and the result comes back to you.
 
-    | | A function you wrote | An API endpoint |
+    | | Calling a function you wrote | Calling an API |
     |---|---|---|
     | **You call it with** | `get_towns("Norfolk")` | `oim.zhili.dev/ma/towns?county=Norfolk` |
     | **What goes in** | parameters in brackets | parameters after `?` |
@@ -187,7 +187,7 @@ def _(mo):
     | **When it goes wrong** | an error in your notebook | a status code and a message |
     | **Where it runs** | your laptop | somebody else's server |
 
-    You cannot see inside it, so its documentation is how you learn its parameters and what it returns.
+    You cannot see the code behind an API, so its documentation is how you learn its parameters and what it returns.
     """)
     return
 
