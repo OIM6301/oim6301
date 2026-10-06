@@ -81,7 +81,7 @@ def _(add_tax):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    If the tax rate changes, you edit the one line inside `add_tax`, and every call uses the new rate. A function can also hold a loop. The next one computes what a whole portfolio costs.
+    If the tax rate changes, you edit the one line inside `add_tax`, and every call uses the new rate.
     """)
     return
 
