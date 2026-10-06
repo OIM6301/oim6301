@@ -33,6 +33,8 @@ def _(mo):
     | ✏️ | Your turn. Add cells with the **+** button |
     | 🚀 | This week's work |
 
+    For a written answer, add a cell under the question, open the cell's **⋯** menu and choose **Convert to Markdown**.
+
     Every ✏️ is part of this week's work. Those marked **Advanced** are optional; try them once the rest is done.
     """)
     return
@@ -165,25 +167,10 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    ### Your written answers
+    ## ✏️ A · Functions of your own
 
-    Two questions below ask for a sentence. This cell is where they go. Click into it, write under the letter, and press `Ctrl+Enter` (Windows) or `Cmd+Enter` (macOS).
-
-    **B ·**
-
-    **F ·**
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md(r"""
-    ## ✏️ A · The largest holding
-
-    Add a cell that defines `find_largest(portfolio)`. It returns the ticker and the cost of the holding that cost the most, as a tuple. Call it on both portfolios.
-
-    *Check yourself: `('TSLA', 38355.0)` and `('VTI', 27408.0)`.*
+    1. Add a cell that defines `count_shares(portfolio)`. It returns the total number of shares in a portfolio. Call it on both portfolios. *Check yourself: `600` and `460`.*
+    2. Add a cell that defines `find_largest(portfolio)`. It returns the ticker and the cost of the holding that cost the most, as a tuple. Call it on both portfolios. *Check yourself: `('TSLA', 38355.0)` and `('VTI', 27408.0)`.*
 
     **Going further.** Add a second parameter, `n`, and return the `n` largest holdings, largest first.
     """)
@@ -195,7 +182,7 @@ def _(mo):
     mo.md(r"""
     ## ✏️ B · Without `return`
 
-    Copy your function from A into a new cell under a new name, and put `print(...)` where the `return` was. Call it and keep the result in a name. In the written answers cell, answer under **B**: what does that name hold, and what could the next cell do with it?
+    Copy `count_shares` into a new cell under a new name, and put `print(...)` where the `return` was. Call it and keep the result in a name. In a markdown cell under it, answer: what does that name hold, and what could the next cell do with it?
     """)
     return
 
@@ -470,7 +457,7 @@ def _(mo):
 
        *Check yourself: **201**, which means the server created something, and your town on the board.*
 
-    3. Delete the `headers=` line and run it again. In the written answers cell, answer under **F**: what did the server answer, and why does it need to know who sent a message?
+    3. Delete the `headers=` line and run it again. In a markdown cell under it, answer: what did the server answer, and why does it need to know who sent a message?
 
     **Going further.** Post something more useful than one town's bill: choose a question somebody would ask, answer it from live data, and post the answer, in 140 characters or fewer.
     """)
