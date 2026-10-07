@@ -11,7 +11,11 @@
 import marimo
 
 __generated_with = "0.24.2"
-app = marimo.App(layout_file="layouts/03-collections-and-apis.slides.json", width="medium", sql_output="polars")
+app = marimo.App(
+    width="medium",
+    layout_file="layouts/03-collections-and-apis.slides.json",
+    sql_output="polars",
+)
 
 
 @app.cell
@@ -191,7 +195,7 @@ def _(mo):
 def _():
     closing_prices = {"AAPL": 260.81, "NVDA": 186.00, "MSFT": 404.88, "GOOG": 308.42}
     closing_prices
-    return (closing_prices,)
+    return
 
 
 @app.cell(hide_code=True)
@@ -218,7 +222,7 @@ def _():
         "Finland", "USA", "USA", "Germany", "France", "Austria", "Argentina", "Venezuela",
     ]
     len(ship_countries)
-    return (ship_countries,)
+    return
 
 
 @app.cell(hide_code=True)
@@ -514,6 +518,7 @@ def _(requests):
         "&temperature_unit=fahrenheit&wind_speed_unit=mph"
         "&timezone=America/New_York"
     )
+    print(babson_url)
     babson_reply = requests.get(babson_url, timeout=10)
     babson_reply.status_code
     return (babson_reply,)

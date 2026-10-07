@@ -6,6 +6,124 @@ app = marimo.App(width="medium")
 
 @app.cell
 def _():
+    # Review of Session 5
+    # Q1
+
+    orders = [
+        {"OrderID": 10248, "ShipCountry": "France"},
+        {"OrderID": 10249, "ShipCountry": "Germany"},
+        {"OrderID": 10248, "ShipCountry": "France"},
+        {"OrderID": 10249, "ShipCountry": "Germany"},
+        {"OrderID": 10248, "ShipCountry": "USA"},
+        {"OrderID": 10249, "ShipCountry": "Germany"},
+        {"OrderID": 10248, "ShipCountry": "France"},
+        {"OrderID": 10249, "ShipCountry": "China"},
+        {"OrderID": 10248, "ShipCountry": "China"},
+    ]
+    type(orders)
+    return (orders,)
+
+
+@app.cell
+def _(orders):
+    orders[0]["ShipCountry"]
+    return
+
+
+@app.cell
+def _(orders):
+    countries = []
+    for order in orders:
+        # print(type(order))
+        print(order['OrderID'], order['ShipCountry'])
+        countries.append(order['ShipCountry'])
+
+    len(set(countries))
+    return
+
+
+@app.cell
+def _():
+    # Q3
+    bmi = 27
+    if bmi >= 30:
+        category = "Obese"
+    elif bmi >= 25:
+        category = "Overweight"
+    elif bmi >= 18.5:
+        category = "Normal"
+    else:
+        category = "Underweight"
+    print(category)
+    return
+
+
+@app.cell
+def _():
+    data = [
+        {
+            "name": "OpenAI",
+            "vendor": "openai",
+            "apiKey": "${input:chat.lm.secret.7a201382}"
+        },
+        {
+            "name": "Babson AI",
+            "vendor": "customendpoint",
+            "apiKey": "${input:chat.lm.secret.-23df36c}",
+            "apiType": "messages",
+            "models": [
+                {
+                    "id": "claude-sonnet-5",
+                    "name": "Sonnet 5 (Babson)",
+                    "toolCalling": True,
+                    "vision": True,
+                    "maxInputTokens": 200000,
+                    "maxOutputTokens": 32000
+                }
+            ]
+        }
+    ]
+    return (data,)
+
+
+@app.cell
+def _(data):
+    data[1]['models'][0]['name']
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
     total = 0
     for charge in [10, 20, 30]:    
         total = total + charge
