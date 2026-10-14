@@ -44,17 +44,21 @@ def _(orders):
 
 @app.cell
 def _():
-    # Q3
-    bmi = 27
-    if bmi >= 30:
-        category = "Obese"
-    elif bmi >= 25:
-        category = "Overweight"
-    elif bmi >= 18.5:
-        category = "Normal"
-    else:
-        category = "Underweight"
-    print(category)
+    # Session 6 - BMI Classification
+
+    patients = [20, 25, 18, 30]
+
+    # wrap the following to a function
+    for bmi in patients:
+        if bmi >= 30:
+            category = "Obese"
+        elif bmi >= 25:
+            category = "Overweight"
+        elif bmi >= 18.5:
+            category = "Normal"
+        else:
+            category = "Underweight"
+        print(category)
     return
 
 
