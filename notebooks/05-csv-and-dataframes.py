@@ -134,6 +134,7 @@ def _(csv, ma_towns, mo):
         "county",
         "population",
         "income_per_capita_dollars",
+        "average_single_family_value_dollars",
         "average_single_family_bill_dollars",
     ]
 
@@ -188,11 +189,13 @@ def _(mo):
 
     **No agent for this one**, and no code completion either. When the editor suggests code in grey as you type, press `Esc` and keep typing your own.
 
-    How many towns have an average single-family tax bill over $10,000, and which county has the most of them? Use `towns_from_file`, a `for` loop, `int()`, and a dictionary that counts, as in notebook 3.
+    `average_single_family_value_dollars` is the state's figure for what a single-family home in the town is worth on average, as the town assesses it for tax. Call a town a **million-dollar town** when that figure is $1,000,000 or more. Across the state the middle town is near $586,000.
 
-    *Check yourself: 65 towns, and Middlesex has the most, with 26.*
+    How many million-dollar towns are there, and which county has the most of them? Use `towns_from_file`, a `for` loop, `int()`, and a dictionary that counts, as in notebook 3.
 
-    **Going further.** Report each county's count as a share of its towns, and see whether Middlesex still leads.
+    *Check yourself: 53 towns, and Middlesex has the most, with 14.*
+
+    **Going further.** Find the town with the most expensive average home in each county.
     """)
     return
 
@@ -200,9 +203,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    # 2. Say What You Want
+    # 2. Describe What You Want
 
-    Your loop in A said **how**: go through every town, convert, compare, add one. That took a dozen lines, and a reader has to run them in their head to know what they answer. **polars** lets you say **what** you want instead.
+    Your loop in A said **how**: go through every town, convert, compare, add one. That took a dozen lines, and a reader has to run them in their head to know what they answer. **polars** lets you describe **what** you want instead.
 
     `pl.read_csv` reads the same file into a **DataFrame**: a table with named columns. It is your list of records shown as a table, each row a record and each column a key, and polars has already turned the numbers into numbers.
     """)
@@ -235,7 +238,7 @@ def _(mo):
     mo.md(r"""
     Here is A's question in polars. Read it as a sentence:
 
-    - `.filter(...)` keeps the towns whose bill is over $10,000. It is the `if` in your loop, applied to every row at once, and `pl.col(...)` names the column it reads.
+    - `.filter(...)` keeps the million-dollar towns. It is the `if` in your loop, applied to every row at once, and `pl.col(...)` names the column it reads.
     - `.group_by("county")` makes one group per county, and `.agg(pl.len())` counts the rows in each. It is your counting dictionary.
     - `.sort(..., descending=True)` puts the largest first.
     """)
@@ -245,11 +248,48 @@ def _(mo):
 @app.cell
 def _(pl, town_table):
     (
-        town_table.filter(pl.col("average_single_family_bill_dollars") > 10_000)
+        town_table.filter(pl.col("average_single_family_value_dollars") >= 1_000_000)
         .group_by("county")
         .agg(pl.len().alias("towns"))
         .sort("towns", descending=True)
     )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    **A count can mislead.** Middlesex has the most million-dollar towns, and it also has 54 towns, more than any county but Worcester. The fairer question is what share of each county's towns are million-dollar towns.
+
+    - `pl.len()` counts all the towns in each county.
+    - A comparison such as `pl.col(...) >= 1_000_000` is `True` or `False` for each town, and `.sum()` adds up the `True`s, which counts them.
+    - `.with_columns()` adds a column computed from the others, here one count divided by the other.
+    """)
+    return
+
+
+@app.cell
+def _(pl, town_table):
+    million_dollar_share = (
+        town_table.group_by("county")
+        .agg(
+            pl.len().alias("towns"),
+            (pl.col("average_single_family_value_dollars") >= 1_000_000)
+            .sum()
+            .alias("million_dollar_towns"),
+        )
+        .with_columns((pl.col("million_dollar_towns") / pl.col("towns")).alias("share"))
+        .sort("share", descending=True)
+    )
+    million_dollar_share
+    return (million_dollar_share,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    The share tells a different story from the count. Every town in Dukes County, which is Martha's Vineyard, and in Nantucket is a million-dollar town, and nearly half of Barnstable's, which is Cape Cod. Middlesex comes sixth.
+    """)
     return
 
 
@@ -284,7 +324,7 @@ def _(mo, town_table):
         f"""
         SELECT county, COUNT(*) AS towns
         FROM town_table
-        WHERE average_single_family_bill_dollars > 10000
+        WHERE average_single_family_value_dollars >= 1000000
         GROUP BY county
         ORDER BY towns DESC
         """
@@ -295,7 +335,7 @@ def _(mo, town_table):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    Read it top to bottom: `SELECT` names the columns of the answer, `FROM` the table, `WHERE` keeps some rows, `GROUP BY` makes one group per county, `COUNT(*)` counts each group, and `ORDER BY ... DESC` puts the largest first. Like the polars version, it says what you want and leaves the how to the computer.
+    Read it top to bottom: `SELECT` names the columns of the answer, `FROM` the table, `WHERE` keeps some rows, `GROUP BY` makes one group per county, `COUNT(*)` counts each group, and `ORDER BY ... DESC` puts the largest first. Like the polars version, it describes what you want and leaves the how to the computer.
     """)
     return
 
@@ -305,7 +345,7 @@ def _(mo):
     mo.md(r"""
     ## ✏️ C · Raise the Bar
 
-    In the SQL cell, `10000` is the bar a town's average bill has to clear. Before you change it to `15000`, predict in a markdown cell under this question: which counties' counts can go down, and can any go up? Then change it in the SQL cell and in the polars cell, and run both. *Check yourself: both give Middlesex 12, Norfolk 6, Essex 2, Worcester 1, which is 21 towns.*
+    In the SQL cell, `1000000` is the bar a town's average home value has to reach. Before you change it to `2000000`, predict in a markdown cell under this question: which counties' counts can go down, and can any go up? Then make the same change in the polars cell that counts million-dollar towns, and run both. *Check yourself: both give Dukes, Middlesex and Norfolk 2 each and Nantucket 1, which is 7 towns.*
 
     **Going further.** Write a SQL query of your own on `town_table`, and check its answer in polars.
     """)
@@ -317,7 +357,10 @@ def _(mo):
     mo.md(r"""
     # 4. The First Chart
 
-    Draw the answer. `.plot.bar()` on a DataFrame draws one bar per row, with a library called **altair**. `alt.X()` and `alt.Y()` name each axis's column and give it a title a reader can understand, and `.properties(title=...)` states what the chart shows. `sort="-y"` puts the tallest bar first.
+    Draw the share. `.plot.bar()` on a DataFrame draws one bar per row, with a library called **altair**. `alt.X()` and `alt.Y()` name each axis's column and give it a title a reader can understand, and `.properties(title=...)` states what the chart shows.
+
+    - Putting the county on `y` lays the bars on their side, so every county's name reads across. `sort="-x"` puts the longest bar first.
+    - `axis=alt.Axis(format="%")` writes a share of `0.25` as 25%.
 
     Wrap it in `mo.ui.altair_chart()`, which is how marimo shows an altair chart of any size.
     """)
@@ -325,14 +368,18 @@ def _(mo):
 
 
 @app.cell
-def _(alt, mo, towns_over_threshold):
-    towns_over_threshold_chart = mo.ui.altair_chart(
-        towns_over_threshold.plot.bar(
-            x=alt.X("county", sort="-y", title="County"),
-            y=alt.Y("towns", title="Towns with an average bill over the threshold"),
-        ).properties(title="Middlesex has the most towns with high tax bills")
+def _(alt, million_dollar_share, mo):
+    million_dollar_chart = mo.ui.altair_chart(
+        million_dollar_share.plot.bar(
+            y=alt.Y("county", sort="-x", title="County"),
+            x=alt.X(
+                "share",
+                title="Share of towns averaging $1,000,000 or more",
+                axis=alt.Axis(format="%"),
+            ),
+        ).properties(title="Every town in Dukes and Nantucket averages $1 million or more")
     )
-    towns_over_threshold_chart
+    million_dollar_chart
     return
 
 
