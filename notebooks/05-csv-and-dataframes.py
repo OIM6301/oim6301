@@ -400,7 +400,7 @@ def _(mo):
 
     *Check yourself: somebody who has not seen this notebook can say what each axis measures.*
 
-    **Going further.** Color the bars or dots by a column with `color=`, and say what the colors add.
+    **Going further.** Color the bars or dots by a column with `color=`, and explain what the colors add.
     """)
     return
 
@@ -422,10 +422,10 @@ def _(mo):
     **What you can do now:**
 
     - [ ] I can save a list of records to a CSV file and read it back with the `csv` module
-    - [ ] I can say why every value the `csv` module reads is text until I convert it
+    - [ ] I can explain why every value the `csv` module reads is text until I convert it
     - [ ] I can read a CSV into a DataFrame and ask it its shape and its column types
     - [ ] I can filter, sort and group a DataFrame
-    - [ ] I can read a short SQL query and say what it asks
+    - [ ] I can read a short SQL query and explain what it asks
     - [ ] I can make one chart from a DataFrame and title its axes
     """)
     return
