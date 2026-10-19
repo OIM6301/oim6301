@@ -288,7 +288,7 @@ def _(pl, town_table):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    The share tells a different story from the count. Every town in Dukes County, which is Martha's Vineyard, and in Nantucket is a million-dollar town, and nearly half of Barnstable's, which is Cape Cod. Middlesex comes sixth.
+    The share tells a different story from the count. Every town in Dukes County, which is Martha's Vineyard and the Elizabeth Islands, and in Nantucket is a million-dollar town, and nearly half of Barnstable's, which is Cape Cod. Middlesex comes sixth.
     """)
     return
 
