@@ -185,15 +185,14 @@ def _(towns_from_file):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    ## ✏️ A · Count by Hand
+    ## ✏️ A · By Hand
 
     **No agent for this one**, and no code completion either. When the editor suggests code in grey as you type, press `Esc` and keep typing your own.
 
     `average_single_family_value_dollars` is the state's figure for what a single-family home in the town is worth on average, as the town assesses it for tax. Call a town a **million-dollar town** when that figure is $1,000,000 or more. Across the state the middle town is near $586,000.
 
-    How many million-dollar towns are there, and which county has the most of them? Use `towns_from_file`, a `for` loop, `int()`, and a dictionary that counts, as in notebook 3.
-
-    *Check yourself: 53 towns, and Middlesex has the most, with 14.*
+    1. How many million-dollar towns are there, and which county has the most of them? Use `towns_from_file`, a `for` loop, `int()`, and a dictionary that counts, as in notebook 3. *Check yourself: 53 towns, and Middlesex has the most, with 14.*
+    2. Which town has the fewest people, and which has the most? Loop over `towns_from_file` and keep the smallest and the largest you have seen so far, the way `find_largest` did in notebook 4. *Check yourself: Gosnold, with 62 people, and Boston, with 673,458.*
 
     **Going further.** Find the town with the most expensive average home in each county.
     """)
@@ -205,7 +204,7 @@ def _(mo):
     mo.md(r"""
     # 2. Describe What You Want
 
-    Your loop in A said **how**: go through every town, convert, compare, add one. That took a dozen lines, and a reader has to run them in their head to know what they answer. **polars** lets you describe **what** you want instead.
+    Your loops in A said **how**: go through every town, convert, compare, add one or keep the smallest. That took a dozen lines, and a reader has to run them in their head to know what they answer. **polars** lets you describe **what** you want instead.
 
     `pl.read_csv` reads the same file into a **DataFrame**: a table with named columns. It is your list of records shown as a table, each row a record and each column a key, and polars has already turned the numbers into numbers.
     """)
@@ -236,7 +235,21 @@ def _(town_table):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    Here is A's question in polars. Read it as a sentence:
+    **A's second step in one line.** `.sort()` puts the rows in order of one column, smallest first, so the first row is the town with the fewest people. `descending=True` puts the largest first.
+    """)
+    return
+
+
+@app.cell
+def _(town_table):
+    town_table.sort("population")
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Here is A's first step in polars. Read it as a sentence:
 
     - `.filter(...)` keeps the million-dollar towns. It is the `if` in your loop, applied to every row at once, and `pl.col(...)` names the column it reads.
     - `.group_by("county")` makes one group per county, and `.agg(pl.len())` counts the rows in each. It is your counting dictionary.
@@ -419,7 +432,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    **What you can do now:**
+    **Self-check:**
 
     - [ ] I can save a list of records to a CSV file and read it back with the `csv` module
     - [ ] I can explain why every value the `csv` module reads is text until I convert it
