@@ -122,7 +122,7 @@ def _(mo):
     - `.writeheader()` writes the first line, and `.writerows()` writes one line per town.
     - `open(path, "w")` opens the file for writing, and `with` closes it when the block ends. The empty `newline` setting is what the `csv` module asks for, so that lines end the same way on every computer.
 
-    A data file goes in `data/`, which sits in the root folder of your repository, one folder up from this notebook.
+    A data file goes in the `data` folder, which sits in the root folder of your repository, one folder up from this notebook.
     """)
     return
 
@@ -153,7 +153,7 @@ def _(csv, ma_towns, mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    **Open it.** In VS Code's Explorer, `data` now sits beside `notebooks`, and `ma-towns.csv` is inside it. Click it: the table is plain text, one town per line.
+    **Open it.** In VS Code's Explorer, the `data` folder now sits beside the `notebooks` folder, and `ma-towns.csv` is inside it. Click it: the table is plain text, one town per line.
 
     **Reading it back.** `csv.DictReader` reads one line at a time and turns each into a dictionary, with the header's names as keys. `list(...)` collects them all, and you are back to a list of records, the shape the API sent.
     """)
