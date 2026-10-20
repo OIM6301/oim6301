@@ -326,7 +326,7 @@ def _(mo):
 
     **This is SQL, a second language, asking A's question once more.** SQL is how databases are asked questions, and from next week the course builds and queries a database. For now, read it; you will write SQL in the database sessions.
 
-    Behind a SQL cell is DuckDB, a database that runs inside the same Python as your notebook. The data stays in your DataFrames. When the cell runs, DuckDB looks up the name in the `FROM` line, here `town_table`, among the notebook's variables and reads that DataFrame as a table. Its answer comes back as a DataFrame too. In notebook 6 you will build a database of your own, in a file, and connect to it.
+    Behind a SQL cell is DuckDB, a database that runs inside the same Python as your notebook. The data stays in your DataFrames. When the cell runs, DuckDB looks up the name in the `FROM` line, here `town_table`, among the notebook's variables and reads that DataFrame as a table. Its answer comes back as a DataFrame too.
     """)
     return
 
