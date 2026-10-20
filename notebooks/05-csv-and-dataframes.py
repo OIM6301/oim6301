@@ -204,7 +204,7 @@ def _(mo):
     mo.md(r"""
     # 2. Describe What You Want
 
-    Your loops in A said **how**: go through every town, convert, compare, add one or keep the smallest. That took a dozen lines, and a reader has to run them in their head to know what they answer. **polars** lets you describe **what** you want instead.
+    Your loops in A spelled out **how**: go through every town, convert, compare, add one or keep the smallest. That took a dozen lines, and a reader has to run them in their head to know what they answer. **polars** lets you describe **what** you want instead.
 
     `pl.read_csv` reads the same file into a **DataFrame**: a table with named columns. It is your list of records shown as a table, each row a record and each column a key, and polars has already turned the numbers into numbers.
     """)
