@@ -46,6 +46,7 @@
         "type": "fragment",
         "showCode": true
       },
+      {},
       {
         "type": "slide"
       },
@@ -56,6 +57,8 @@
       {
         "type": "slide"
       },
+      {},
+      {},
       {
         "type": "slide"
       },

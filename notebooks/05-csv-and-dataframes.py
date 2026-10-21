@@ -12,8 +12,12 @@
 
 import marimo
 
-__generated_with = "0.25.1"
-app = marimo.App(layout_file="layouts/05-csv-and-dataframes.slides.json", width="medium", sql_output="polars")
+__generated_with = "0.24.2"
+app = marimo.App(
+    width="medium",
+    layout_file="layouts/05-csv-and-dataframes.slides.json",
+    sql_output="polars",
+)
 
 
 @app.cell
@@ -110,6 +114,7 @@ def _(get_towns, ma_counties):
         for _town in get_towns(_county["name"]):
             ma_towns.append(_town)
     len(ma_towns)
+    # ma_towns
     return (ma_towns,)
 
 
@@ -164,8 +169,14 @@ def _(mo):
 def _(csv, ma_towns_csv):
     with open(ma_towns_csv, newline="", encoding="utf-8") as _file:
         towns_from_file = list(csv.DictReader(_file))
-    len(towns_from_file), towns_from_file[0]
+    len(towns_from_file)
     return (towns_from_file,)
+
+
+@app.cell
+def _(towns_from_file):
+    towns_from_file[0]
+    return
 
 
 @app.cell(hide_code=True)
@@ -196,6 +207,33 @@ def _(mo):
 
     **Going further.** Find the town with the most expensive average home in each county.
     """)
+    return
+
+
+@app.cell
+def _(towns_from_file):
+    # 1
+    # input: towns_from_file, a list of dictionaries, e.g.
+    # output: {Middlesex: xx, Worcester: xx }
+
+    county_counts = {}
+    for town in towns_from_file:
+        if int(town["average_single_family_value_dollars"]) >= 1000000:
+            print(town['name'])
+            county = town["county"]
+            if county in county_counts:  # if we've seen this county before
+                county_counts[county] += 1 # same as x = x + 1
+            else:
+                county_counts[county] = 1
+            # could use .get() in one-liner
+
+    county_counts
+    return (county_counts,)
+
+
+@app.cell
+def _(county_counts):
+    sum(county_counts.values())
     return
 
 
@@ -242,7 +280,7 @@ def _(mo):
 
 @app.cell
 def _(town_table):
-    town_table.sort("population")
+    town_table.sort("population", descending=True)
     return
 
 
@@ -342,7 +380,7 @@ def _(mo, town_table):
         ORDER BY towns DESC
         """
     )
-    return (towns_over_threshold,)
+    return
 
 
 @app.cell(hide_code=True)
