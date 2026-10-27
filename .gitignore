@@ -182,3 +182,5 @@ cython_debug/
 
 
 __marimo__/
+# The TV show catalog, downloaded by notebooks/shows-db-demo.py from CS50; IMDb data, not ours to publish.
+data/shows.db
