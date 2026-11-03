@@ -119,7 +119,7 @@ def _(mo):
     **One cell builds it.** It deletes the old file, opens a new one, creates the tables and loads them, and closes the file when the `with` block ends. Read the two `CREATE TABLE` statements against the diagram:
 
     - `name` is the **primary key** of each table. A county's name or a town's name names exactly one row, and the database refuses a second row with the same name.
-    - `county` in `towns` is a **foreign key**. `REFERENCES counties(name)` makes the database refuse a town whose county is not in `counties`, so `counties` has to be filled first.
+    - `county` in `towns` is a **foreign key**. `REFERENCES counties(name)` makes the database refuse a town whose county is not in `counties`, so `counties` has to be filled first. This rule is called **referential integrity**.
     - `NOT NULL` and `CHECK` are rules about one column. A population has to be there and has to be more than zero.
     - `fips_code` is `UNIQUE`: it is not the key, and still no two counties can share one.
     - `government_abolished_year` has no `NOT NULL`. For the six counties that still have a county government, the year is empty, and that is a real answer.
