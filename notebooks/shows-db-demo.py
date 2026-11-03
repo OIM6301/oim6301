@@ -35,7 +35,7 @@ def _(mo):
     mo.md(r"""
     # The TV Show Catalog
 
-    The database behind the two pages you designed on paper: `shows.db`, which CS50 built from IMDb's data. The first run downloads it from [CS50's lecture files](https://cdn.cs50.net/2024/fall/lectures/7/src7.zip) into the `data` folder. It is a SQLite file; DuckDB opens it through its `sqlite` extension, which it also downloads the first time.
+    The database behind the two pages you designed on paper: `shows.db`, built from IMDb's data. The first run downloads it into the `data` folder. It is a SQLite file; DuckDB opens it through its `sqlite` extension, which it also downloads the first time.
     """)
     return
 
@@ -129,9 +129,29 @@ def _(con):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
+    ## Which year had the most new shows?
+    """)
+    return
+
+
+@app.cell
+def _(con):
+    con.sql("""
+        SELECT year, count(*) AS shows
+        FROM shows
+        GROUP BY year
+        ORDER BY shows DESC
+        LIMIT 5
+    """).pl()
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
     ## One star stored twice on one show
 
-    `stars` declares no primary key, so nothing stops a pair from being stored twice.
+    `stars` has no primary key, so nothing stops a pair from being stored twice.
     """)
     return
 
