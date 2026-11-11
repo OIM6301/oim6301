@@ -15,8 +15,12 @@
 
 import marimo
 
-__generated_with = "0.25.1"
-app = marimo.App(layout_file="layouts/07-combining-tables.slides.json", width="medium", sql_output="polars")
+__generated_with = "0.24.2"
+app = marimo.App(
+    width="medium",
+    layout_file="layouts/07-combining-tables.slides.json",
+    sql_output="polars",
+)
 
 
 @app.cell
@@ -231,12 +235,25 @@ def _(mo):
 @app.cell
 def _(ask, towns_database):
     ask(towns_database, """
-        SELECT c.name
+        SELECT c.name, t.name, t.average_single_family_bill_dollars
+        FROM counties AS c
+        JOIN towns AS t
+            ON t.county = c.name AND t.average_single_family_bill_dollars > 15000
+        -- WHERE t.name IS NULL
+        ORDER BY t.average_single_family_bill_dollars DESC
+    """)
+    return
+
+
+@app.cell
+def _(ask, towns_database):
+    ask(towns_database, """
+        SELECT c.name, t.name, t.average_single_family_bill_dollars
         FROM counties AS c
         LEFT JOIN towns AS t
             ON t.county = c.name AND t.average_single_family_bill_dollars > 15000
-        WHERE t.name IS NULL
-        ORDER BY c.name
+        WHERE t.name IS NOT NULL
+        ORDER BY t.average_single_family_bill_dollars DESC
     """)
     return
 
@@ -291,9 +308,9 @@ def _(mo):
 def _(ask, northwind_database):
     ask(northwind_database, """
         SELECT
-            (SELECT count(*) FROM orders) AS orders,
-            (SELECT count(*) FROM order_details) AS order_lines,
-            (SELECT count(*)
+            (SELECT count(OrderID) FROM orders) AS orders,
+            (SELECT count(OrderID) FROM order_details) AS order_lines,
+            (SELECT count(o.OrderID)
              FROM orders AS o
              JOIN order_details AS d ON d.OrderID = o.OrderID) AS joined
     """)
@@ -401,6 +418,26 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
+    # Manager and Analyst Exercise
+    """)
+    return
+
+
+@app.cell
+def _(ask, northwind_database):
+    # Which employees have handled the highest number of orders, and how many orders has each employee processed?
+
+    ask(northwind_database, """
+    SELECT
+    FROM
+
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
     # 5. After Class: The Same Joins on a Server
 
     So far every database we have used is a file on your computer. Most companies keep theirs on a server, and you connect to it over the network. Babson runs one with **AdventureWorks**, a bicycle company's sales database, on Microsoft SQL Server. The version of SQL that SQL Server uses is called **T-SQL**. It differs from DuckDB's in small ways: tables are inside schemas, as in `Sales.SalesOrderHeader`, and you write `TOP 5` after `SELECT` where DuckDB writes `LIMIT 5` at the end.
@@ -443,7 +480,7 @@ def _(mo, os, pl):
             return pl.DataFrame(_cursor.fetchall(), schema=_columns, orient="row")
 
     ask_server("SELECT TOP 5 SalesOrderID, OrderDate, Freight FROM Sales.SalesOrderHeader ORDER BY SalesOrderID")
-    return (ask_server,)
+    return
 
 
 @app.cell(hide_code=True)
