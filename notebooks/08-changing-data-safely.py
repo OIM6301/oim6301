@@ -93,8 +93,12 @@ def _(mo):
 def _(duckdb, towns_database):
     def build_database():
         with duckdb.connect(towns_database, read_only=True) as source:
-            county_rows = source.sql("SELECT name, towns, population FROM counties").pl()
-            town_rows = source.sql("SELECT * FROM towns").pl()
+            county_rows = source.sql("SELECT name, towns, population FROM counties").fetchall()
+            town_rows = source.sql("""
+                SELECT name, county, population,
+                       income_per_capita_dollars, average_single_family_bill_dollars
+                FROM towns
+            """).fetchall()
         database = duckdb.connect()
         database.execute("""
             CREATE TABLE counties (
@@ -112,8 +116,8 @@ def _(duckdb, towns_database):
                 average_single_family_bill_dollars INTEGER CHECK (average_single_family_bill_dollars >= 0)
             )
         """)
-        database.execute("INSERT INTO counties SELECT * FROM county_rows")
-        database.execute("INSERT INTO towns SELECT * FROM town_rows")
+        database.executemany("INSERT INTO counties VALUES (?, ?, ?)", county_rows)
+        database.executemany("INSERT INTO towns VALUES (?, ?, ?, ?, ?)", town_rows)
         return database
 
     return (build_database,)
