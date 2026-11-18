@@ -14,7 +14,7 @@
 
 import marimo
 
-__generated_with = "0.25.1"
+__generated_with = "0.24.2"
 app = marimo.App(width="medium", sql_output="polars")
 
 
@@ -111,6 +111,11 @@ def _(alt, mo, town_bills):
             "income is per person, for everyone who lives in the town."
         ),
     ])
+    return
+
+
+@app.cell
+def _():
     return
 
 
